@@ -1,0 +1,5 @@
+= simple_form_for @report do |f|
+  = f.input :what_is_done, :label => "Что было сделано", as: :rich_text_area
+  = f.input :plan_for_next_day, :label => "Что буду делать завтра", as: :rich_text_area
+  = f.association :project, :label => "Выбрать проект"
+  = f.button :submit

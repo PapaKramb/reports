@@ -1,0 +1,26 @@
+%h1 Репорты
+.container
+  #reports
+    %input.search{:placeholder => "Поиск..."}/
+    %span.sort{:rel => "report.project_id-1"} По id проекта
+    %span.sort{:rel => "report.what_is_done"} По номеру репорта
+    %br/
+    %br/
+    .divst
+      .head
+        %div.numb Номер репорта
+        %div.numb id проекта
+        %div.done Выполнено
+        %div.done План на завтра
+      %div
+        - @reports.each do |report|
+          %div.numb= report.id
+          %div.numb= report.project_id-1
+          %div.done= report.what_is_done
+          %div.done= report.plan_for_next_day
+          %div.act= link_to "Редактировать", edit_report_path(report), class: "btn btn-outline-warning"
+          |
+          %div.act= link_to "Удалить", report_path(report), method: :delete, data: { confirm: "Вы уверены?" }, class: "btn btn-outline-danger"
+          %br/
+
+    = link_to "Новый репорт", new_report_path, class: "btn btn-outline-success"

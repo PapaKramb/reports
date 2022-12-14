@@ -1,0 +1,25 @@
+/ Navbar
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container-fluid
+    #navbarSupportedContent.collapse.navbar-collapse
+      %a.navbar-brand.mt-2.mt-lg-0{:href => "#"}
+        %img{:alt => "", :height => "15", :loading => "lazy", :src => "https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"}/
+      - if user_signed_in?
+        %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+          %li.nav-item
+            - if allowed_to?(:index?, User)
+              = link_to 'Пользователи', admin_users_path, class: "nav-link"
+          %li.nav-item
+            = link_to 'Проекты', admin_projects_path, class: "nav-link"
+          %li.nav-item
+            = link_to 'Репорты', reports_path, class: "nav-link"
+    .d-flex.align-items-center
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        - if user_signed_in?
+          %li
+            = link_to current_user.email, root_path, class: "nav-link"
+          %li
+            = link_to 'Выйти', destroy_user_session_path, method: :delete, class: "nav-link"
+        - else
+          %li
+            = link_to 'Войти', new_user_session_path, class: "nav-link"

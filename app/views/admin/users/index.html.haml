@@ -1,0 +1,15 @@
+%h1 Пользователи
+%table
+  %thead
+    %tr
+      %th Title
+      %th{:colspan => "2"}
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = user.email
+          |
+          %td= link_to t('links.delete'), admin_user_path(user), method: :delete, confirm: t('links.confirms.delete'), class: "btn btn-outline-danger"
+%br/
+= link_to "Добавить пользователя", new_admin_user_path, class: "btn btn-outline-success"
